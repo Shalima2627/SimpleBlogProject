@@ -1,0 +1,87 @@
+{% extends 'Index.html' %}
+{% block content %}
+
+<style>
+    .cursor::after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background-color: #fff;
+    animation: cursor .6s linear infinite alternate;
+    will-change: opacity;
+    }
+    .w-70 {
+        width: 20rem;
+    }
+    .card-img-top {
+        height: 200px; /* Adjust the height according to your design */
+        background-size: cover; /* Ensures the image covers the entire div */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        border-radius: 4px 4px 0 0; /* Optional: adds rounded corners to the top */
+    }
+</style>
+
+<div class="container mt-5">
+        <h1 style="text-align: center; padding-top: 30px;">Welcome to MY BLOG<span>😁</span></h1>
+        </h1>
+</div>
+
+<div class="container">
+    <section>
+        <div class="container text-center">
+                <div class="row">
+                    <h2 class="text-center">CATEGORY</h2><br><br>
+                    {% for category in categories %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="{{ category.thumbnail.url }}" alt="Category Image" class="card-img-top">
+                                <div class="card-body">
+                                    <h1 class="display-3">{{ category.title }}</h1>
+                                    <p class="lead">{{ category.subtitle }}</p>
+                                    <a href="{% url 'PostList' category.slug %}" class="btn btn-light">Posts</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+    </section><br><br>
+</div>
+
+<section>
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="text-center">Recent Posts</h1>
+                <p class="text-center" style="color: black;">Those are recently added Posts</p>
+            </div>
+        </div>
+
+        <div>
+            <div class="row">
+                {% for obj in object_list %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{{ obj.thumbnail.url }}" alt="Category Image" class="card-img-top">
+                                <div class="card-body">
+                                    <h1 class="display-5">{{ obj.title }}</h1>
+                                        <p class="lead" style="color: black;">{{ obj.overview }}</p>
+                                            {% if obj.slug %}
+                                                <a href="{% url 'post' obj.slug %}" class="card-link">Read More</a>
+                                            {% else %}
+                                                a href="#" class="card-link">Read More</a>   <!--Handle empty slug case-->
+                                            {% endif %}
+                                </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>   
+        </div>
+        
+    </div>
+</section>
+<br><br><br><br><br>
+{% endblock content %}

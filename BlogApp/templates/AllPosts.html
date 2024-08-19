@@ -1,0 +1,44 @@
+{% extends "Index.html" %}
+{% block content %}
+
+<style>
+    .test{
+        padding-top: 70px;
+        font-size: xx-large;
+    }
+    .pic{
+        width: 25%;
+        height: 25%;
+        padding-top: 10px;
+    }
+
+</style>
+
+<section>
+    <div>
+        <div class="container">
+            <h1 class="test">All Posts!!</h1>
+            <div>
+                <div class="row">
+                    {% for post in posts %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="{{ post.thumbnail.url }}" alt="content" class="pic">
+                                    <div class="card-body">
+                                        <h3 style="color: black;">
+                                            {{ post.subtitle }}
+                                        </h3>
+                                        <a href="{% url 'post' post.slug %}">{{ post.title }}</a>
+                                        <p style="color: black;">{{ post.overview }}</p>
+                                    </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>   
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+

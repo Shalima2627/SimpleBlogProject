@@ -1,0 +1,39 @@
+{% extends "Index.html" %}
+{% block content %}
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <!-- Header Section -->
+        <div class="row mb-4">
+            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
+                <h1 class="display-4 mb-2 text-dark">
+                    {{ category.title }}
+                </h1>
+                <div class="bg-pink-500" style="height: 4px; width: 80px; border-radius: 2px;"></div>
+            </div>
+        </div>
+
+        <!-- Posts Section -->
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="content" style="height: 240px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-pink-500 text-small font-weight-bold">
+                            {{ post.subtitle }}  <!-- Ensure 'subtitle' exists in your model -->
+                        </h5>
+                        <a href="{% url 'post' post.slug %}" class="card-link text-dark font-weight-bold">
+                            {{ post.title }}
+                        </a>
+                        <p class="card-text" style="color: black;">
+                            {{ post.overview }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

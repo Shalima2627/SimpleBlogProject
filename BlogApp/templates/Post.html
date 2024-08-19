@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% load customtags %}
+
+{% block content %}
+
+<body>
+    <style>
+        .container {
+            padding-top: 10px;
+        }
+        .postpic {
+            height: 30%;
+            width: 30%;
+        }
+        .authpic {
+            width: 80px;
+            height: 80px;
+            border-radius: 2px;
+        }
+        .authname{
+            color: black;
+            font-size: smaller;
+            font-style: italic;
+        }
+        .bord{
+            border: 1px solid royalblue;
+        }
+    </style>
+
+    <div>
+        <div class="container" style="padding-top: 80px;">
+            <div>
+                <h3>{{ post.title }}</h3>
+                <p>{{ latest.timestamp }}</p>
+                <img src="{{ post.thumbnail.url }}" url="content" class="postpic">
+            </div>
+            <!--Post Contents-->
+            <div class="container">
+                {{ post.content }}
+            </div>
+        </div>
+        <hr class="bord">
+        <!--Author-->
+        <div class="container">
+            <img src="{{ post.author.Profile_Pic.url }}" class="authpic">
+            <p class="authname">{{ post.author.user }}</p>
+        </div>
+        <hr>
+    </div>
+
+    <script>
+        var h = document.documentElement,
+            b = document.body,
+            st = 'scrollTop',
+            sh = 'scrollHeight',
+            progress = document.querySelector('.progress'),
+            scroll;
+            var scrollpos = window.scrollY;
+		    var header = document.getElementById("header");
+		    var navcontent = document.getElementById("nav-content");
+
+        document.addEventListener('scroll', function() {
+            scroll = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+            progress.style.setProperty('--scroll', scroll + '%');
+
+            scrollpos = window.scrollY; 
+        
+            if (scrollpos > 10) {
+                header.classList.add("bg-white");
+                header.classList.add("shadow");
+                navcontent.classList.remove("bg-gray-100");
+                navcontent.classList.add("bg-white");
+            } else {
+                header.classList.remove("bg-white");
+                header.classList.remove("shadow");
+                navcontent.classList.remove("bg-white");
+                navcontent.classList.add("bg-gray-100");
+            }
+        });
+
+        document.getElementById('nav-toggle').onclick = function() {
+			document.getElementById("nav-content").classList.toggle("hidden");
+		}
+    </script>
+</body>
+{% endblock content %}
