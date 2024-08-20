@@ -27,8 +27,7 @@ This is a simple blog project built with:
     venv\Scripts\activate  # On IOS use `source venv/bin/activate`
 4. Install the dependencies:
     pip install -r requirements.txt
-5. Run the development server:
-    python manage.py runserver
+5. Run the development server: "here" python manage.py runserver
 
 
 
